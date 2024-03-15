@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { pizzas } from "./data";
+import "./App.css";
+import { useState } from "react";
+import PizzaItem from "./components/Pizza/pizza";
 
 function App() {
+  const [firstPizza, setFirstPizza] = useState(0);
+  const [secondPizza, setSecondPizza] = useState(0);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="pizzas">
+        <PizzaItem
+          pizzasLength={pizzas.length}
+          currentPizza={firstPizza}
+          pizza={pizzas[firstPizza]}
+          setPizza={setFirstPizza}
+        />
+        <PizzaItem
+          pizzasLength={pizzas.length}
+          currentPizza={secondPizza}
+          pizza={pizzas[secondPizza]}
+          setPizza={setSecondPizza}
+          secondPizza={true}
+        />
+      </div>{" "}
+      <p>
+        First Pizza price
+        <em>{pizzas[firstPizza].price}$ </em>
+      </p>
+      <p>
+        Second Pizza price
+        <em>{pizzas[firstPizza].price}$ </em>
+      </p>
+      <p>
+        Total price
+        <em>{pizzas[firstPizza].price + pizzas[secondPizza].price}$ </em>
+      </p>
     </div>
   );
 }

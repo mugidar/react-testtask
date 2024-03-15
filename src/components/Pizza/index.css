@@ -1,0 +1,17 @@
+body {
+
+}
+
+.pizza_container {
+  width: 500px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  
+}
+.pizza_container > img {
+  width: 100%;
+}
+.pizza_container > button {
+  font-size: 36px;
+}

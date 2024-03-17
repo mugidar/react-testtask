@@ -1,11 +1,17 @@
 import { pizzas } from "./data";
 import "./App.css";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import PizzaItem from "./components/Pizza/pizza";
+import { ModalContext } from "./providers/cart-modal-provider";
 
 function App() {
-  const [firstPizza, setFirstPizza] = useState(0);
-  const [secondPizza, setSecondPizza] = useState(0);
+  const [firstPizza, setFirstPizza] = useState(pizzas[0].id);
+  const [secondPizza, setSecondPizza] = useState(pizzas[0].id);
+  const { isOpen, setIsOpen } = useContext(ModalContext);
+  console.log(pizzas[firstPizza].price);
+  const handleSubmit = () => {
+    setIsOpen(true);
+  };
 
   return (
     <div className="App">
@@ -24,18 +30,27 @@ function App() {
           secondPizza={true}
         />
       </div>{" "}
-      <p>
-        First Pizza price
-        <em>{pizzas[firstPizza].price}$ </em>
-      </p>
-      <p>
-        Second Pizza price
-        <em>{pizzas[firstPizza].price}$ </em>
-      </p>
-      <p>
-        Total price
-        <em>{pizzas[firstPizza].price + pizzas[secondPizza].price}$ </em>
-      </p>
+      <div className="summary">
+        <div className="prices_container">
+          <table border={1} cellPadding={0} cellSpacing={0} className="prices">
+            <tr>
+              <td>First Pizza price:</td> <td>{pizzas[firstPizza].price}$ </td>
+            </tr>
+            <tr>
+              <td> Second Pizza price:</td>{" "}
+              <td>{pizzas[secondPizza].price}$ </td>
+            </tr>
+            <tr>
+              <td> Total price: </td>{" "}
+              <td>{pizzas[firstPizza].price + pizzas[secondPizza].price}$ </td>
+            </tr>
+          </table>
+        </div>
+        <button className="place_order-btn" onClick={() => handleSubmit()}>
+          {" "}
+          Place order
+        </button>
+      </div>
     </div>
   );
 }

@@ -1,11 +1,47 @@
 * {
   padding: 0;
   margin: 0;
+  font-family: sans-serif;
 }
-
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+}
+.place_order-btn {
+  padding: 5px 10px;
+  border-radius: 12px;
+  border: 1px solid gray;
+  background: rgb(70, 70, 70);
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  text-transform: uppercase;
+}
 .pizzas {
   display: flex;
   justify-content: center;
   gap: 5px;
 }
+.prices_container {
+  display: flex;
+  justify-content: center;
+}
+.prices {
+  font-size: 24px;
+}
 
+.prices {
+  padding: 10px;
+  border: 0;
+}
+
+.prices td {
+  padding: 5px;
+}
+
+.summary {
+  display: flex; 
+  align-items: center;
+}

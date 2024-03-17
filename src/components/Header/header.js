@@ -1,11 +1,17 @@
-import React from 'react'
-import "./index.css"
+import React, { useContext, useEffect, useState } from "react";
+import "./index.css";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { ModalContext } from "../../providers/cart-modal-provider";
 const Header = () => {
+  const { isOpen, setIsOpen } = useContext(ModalContext);
+
   return (
     <header>
-        Header
-    </header>
-  )
-}
+      <span>MugiSplitPizza </span>
 
-export default Header
+      <ShoppingCartIcon onClick={() => setIsOpen(true)} className="cart-icon" />
+    </header>
+  );
+};
+
+export default Header;

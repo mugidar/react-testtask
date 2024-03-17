@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./index.css";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+
 const PizzaItem = ({
   pizza,
   secondPizza = false,
@@ -12,17 +15,34 @@ const PizzaItem = ({
     setPizza((prev) => (prev -= 1));
   };
   const onNext = () => {
-    if (pizzasLength - 1 === currentPizza + 1) return;
-    setPizza((prev) => (prev += 1));
+    if (pizzasLength === currentPizza + 1) return;
+    setPizza((prev) => prev + 1);
   };
+
+  useEffect(() => {
+    !secondPizza
+      ? localStorage.setItem("firstPizzaId", currentPizza)
+      : localStorage.setItem("secondPizzaId", currentPizza);
+  }, [currentPizza]);
+
+  const formattedDesc = pizza.desc.split(",");
+  console.log(formattedDesc);
 
   return (
     <div>
-      <h1>{pizza.name}</h1>
-      <p>{pizza.desc}</p>
-      <em>{pizza.price}$</em>
+      <div className="pizza_info">
+        <h1>{pizza.name}</h1>
+        <div className="pizza_desc-tags">
+          {formattedDesc.map((desc) => (
+            <span className="pizza_desc-tag" key={desc}>{desc}</span>
+          ))}
+        </div>
+        <em>{pizza.price}$</em>
+      </div>
       <div className="pizza_container">
-        <button onClick={onPrev}>↑</button>
+        <button onClick={onPrev}>
+          <KeyboardArrowUpIcon />
+        </button>
         <img
           src={`/${pizza.img}`}
           style={{
@@ -31,7 +51,9 @@ const PizzaItem = ({
           }}
           alt=""
         />
-        <button onClick={onNext}>↓</button>
+        <button onClick={onNext}>
+          <KeyboardArrowDownIcon />
+        </button>
       </div>
     </div>
   );
